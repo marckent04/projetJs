@@ -1,0 +1,51 @@
+<% include ./partials/head %>
+<% include ./partials/navTop %>
+<% include ./partials/header %>
+
+<h1 class="text-center pageTitle">Inscription</h1>
+<div class="titleDecoration"></div>
+
+<form action="" method="post" class="col-md-4" id="inscriptionForm">
+    <div class="row">
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fname">Prenoms</label>
+        <input type="text" class="form-control" placeholder="Prenoms" id="fname" name="fname">
+        <small class="form-text text-danger"></small>
+    </div>
+    <div class="form-group">
+        <label for="name">Nom</label>
+        <input type="text" class="form-control" placeholder="Votre nom" id="name" name="name">
+        <small class="form-text text-danger"></small>
+    </div>
+    <div class="form-group">
+        <label for="mail">Adresse Mail</label>
+        <input type="email" class="form-control" id="mail"placeholder="email" name="mail">
+        <small class="form-text text-danger"></small>
+    </div>
+
+    <div class="row form-group">
+        <div class="col">
+            <label for="mdp">mot de passe</label>
+            <input type="password" class="form-control" id="mdp" placeholder="mot de passe" name="mdp">
+            <small class="form-text text-danger"></small>
+        </div>
+        <div class="col">
+            <label for="Rmdp">Retapez le mot de passe</label>
+            <input type="password" class="form-control" id="Rmdp" placeholder="mot de passe" name="Rmdp">
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-warning btn-block">S'inscrire</button>
+    </div>
+
+
+</form>
+
+<% include ./partials/footer %>

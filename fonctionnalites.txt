@@ -1,0 +1,15 @@
+systeme de connexion 
+systeme de deconnexion 
+systeme d'inscription 
+
+systeme de notification 
+systeme d'achat
+systeme de confirmation a double facteur 
+crud base de donnees 
+
+liste des modules 
+
+session
+sql
+socket.io
+

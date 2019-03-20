@@ -1,0 +1,48 @@
+<div class="navTop d-none d-md-block">
+                <div class="container">
+                    <ul>
+                        <div class="left">
+                            <li><a href="#">A propos de nous</a></li>
+                            <li><a href="#">Paiement et livraison</a></li>
+                            <li><a href="#">remises</a></li>
+                            <li><a href="#">Contacts</a></li>
+                        </div>
+                        <div class="right">
+                            <li>
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#connexionModal">
+                                    <i class="fas fa-lock"></i> Se connecter
+                                </button>
+                            </li>
+                            <li><a href="/inscription">Creer un compte</a></li>
+                        </div>    
+                    </ul>
+                </div>
+
+                <!--modals-->
+                <div class="modal fade" id="connexionModal" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-body">
+                                <form action="/connect" method="post" id='connexionForm'>
+                                    <p class='text-center'><i class="fas fa-user-circle"></i></p>
+                                    <div class="form-group">
+                                      <label for="mail">E-mail</label>
+                                      <input type="text" name="mail" id="" class="form-control" placeholder="Votre adresse mail">
+                                      <small class="text-danger" id='mailErr'></small>
+                                    </div>
+
+                                    <div class="form-group">
+                                      <label for="mdp">Mot de passe</label>
+                                      <input type="password" name="mdp" id="mdp" class="form-control" placeholder="Votre mot de passe">
+                                      <small class="text-danger" id='mdpErr'></small>
+                                    </div>
+
+                                    <div class="text-center">
+                                        <button type="submit" class="btn btn-primary">Se connecter</button>
+                                    </div>
+                                </form>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+        </div>

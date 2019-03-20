@@ -1,0 +1,14 @@
+js : inscription et connexion sans rechargement de page
+
+aucun rechargement de page une fois connecte
+
+systeme de notifications ajax 
+
+une interface pour l'user une interface pour le livreur 
+
+validation de reception de plat a la fois par le livreur et par le client 
+
+
+menu : historique de mes commandes, mes commandes, mes plats favoris, 
+
+donner son appreciation apres avoir manger
