@@ -1,0 +1,16 @@
+<div class="col-md-4">
+    <div class="plat" id="<%= plat.id %>">
+        <span class="price"><%= plat.price %></span>
+        <div class="imagePlat">
+            <img src="<%= path %>" class="img-fluid img-thumbnail">
+        </div>
+        <h4 class="nom text-center text-success"><%= plat.lib %></h4>
+        <p class="description text-center"><%= plat.description %></p>
+        <div>
+            <button class="btn btn-block btn-info addCartBtn" >Ajouter au panier <i class="fas fa-cart-plus"></i></button>
+            <div class="orangeDivider"></div>
+            <p class="text-center qte">Quantite restante : <span class="text-danger"><%= plat.amount %></span></p>
+            <div class="orangeDivider"></div>
+        </div>
+    </div>
+</div>

@@ -1,17 +1,17 @@
-<% include ./partials/head %>
-<% include ./partials/navTop %>
-<% include ./partials/header %>
+<% include partials/navTopC.ejs %>
+<% include partials/head.ejs %>
+<% include partials/headerC.ejs %>
 <% include ./partials/panier %>
 
 <!-- Contenu-->
-<h2 class='text-center pageTitle'>Le dejeuner</h2>
+<h1 class='text-center pageTitle'>Le p'tit Dej</h1>
 <div class='titleDecoration'></div>
 
 <section class="container foods">
         <div class="row">
             <% plats.forEach(function (plat) {
                 var path = '../public/images/dej/' + plat.poster;
-                if (plat.idType === 2) {
+            if (plat.idType === 2) {
             %>
                 <%- include partials/plat.ejs %>
             <% }}); %>

@@ -7,9 +7,19 @@
         <h1>Maman</h1>
         <p>Heures de service <span class="text-warning"> 05:00 - 00:00</span></p>
     </div>
-    <div class="col-md-4">
-        <button type="button" class="btn btn-lg panier"><h6><span class="badge badge-success" id='notifsCart'>0</span></h6><i class="fas fa-shopping-cart"></i> </button>
-    </div>    
+    <div class="col-md-4" id="userAndCart">
+        <button type="button" class="btn btn-lg panier" id="togglePanier"><h6><span class="badge badge-success" id='notifsCart'>0</span></h6><i class="fas fa-shopping-cart"></i> </button>
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="userButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Hi, Mr <%= session.name %></button>
+            <div class="dropdown-menu userMenu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="/home">Mes infos</a>
+                <div class="menuDivider"></div>
+                <a class="dropdown-item" href="#">Mes commandes</a>
+                <div class="menuDivider"></div>
+                <a class="dropdown-item" href="/disconnect">Se deconnecter</a>
+            </div>
+        </div>
+    </div>
 </div>
 
 
