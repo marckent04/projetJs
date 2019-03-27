@@ -389,9 +389,9 @@ const db = mysql.createConnection({
                             })
                         }).then((r) => {
                             results.mail = (r.length === 1) ? 4 : 1
+                            if (results.mail === 4) socket.emit('resInscription', results)
+                            
 
-                            console.log(`Valeur de socket : ${socket.nb}`)
-                            console.log(`4eme valeur ${results.mail}`)
                             if (results.mail === 1) {
                                 let add = new Promise((resolve, reject) => {
                                     let cryptMdp = crypto.createHmac('sha256', data[3].value).update('NaNguy').digest('hex');
@@ -404,14 +404,14 @@ const db = mysql.createConnection({
                                             }
                                         })
                                 })
+                                 socket.emit('resInscription', results)
 
                             }
 
                         }).catch((err) => {
                             console.log(err.message)
                         })
-                        console.log(`FIn socket : ${socket.nb}`)
-                        socket.emit('resInscription', results)
+                       
                     } else
                         socket.emit('resInscription', results)
 
