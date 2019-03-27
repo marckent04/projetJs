@@ -1,0 +1,37 @@
+<% include partials/navTopC.ejs %>
+<% include partials/head.ejs %>
+<% include partials/headerC.ejs %>
+<% include ./partials/panier %>
+
+<section>
+    <h2 class="text-center pageTitle">La facture</h2>
+    <div class='titleDecoration'></div>
+    <div class="caisse text-center">
+        <% DynInfos.panier.forEach(function (food) { %>
+
+        <div class="more row">
+            <div class="col-8 text-left">
+                <p><%=food.lib%></p>
+            </div>
+            <div class="col-4 text-right">
+                <span><%= food.price %> Frs</span>
+            </div>
+        </div>
+        <% }) %>
+        <div class="more">
+            <p class="text-center">Frais de livraison</p>
+            <span>1000 Frs</span>
+        </div>
+        <hr>
+        <div class="more">
+            <span>Total a payer : </span>
+            <span><%= DynInfos.prices[0] + 1000%> Frs</span>
+        </div>
+
+        <button class="btn btn-success" id="confirmBuy">Confirmer l'achat</button>
+    </div>
+
+
+</section>
+
+<% include ./partials/footer %>

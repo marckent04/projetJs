@@ -8,14 +8,16 @@
 <div class='titleDecoration'></div>
 
 <section class="container foods">
+    <section class="container foods">
         <div class="row">
             <% plats.forEach(function (plat) {
-                var path = '../public/images/dej/' + plat.poster;
-            if (plat.idType === 2) {
+                var path = '../public/images/ptiDej/' + plat.poster;
+            if (plat.idType === 1) {
             %>
                 <%- include partials/plat.ejs %>
             <% }}); %>
         </div>
+    </section>
     </section>
 
 <!--Fin contenu-->

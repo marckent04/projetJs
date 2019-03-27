@@ -1,0 +1,57 @@
+<% include partials/navTopC %>
+<% include partials/head %>
+<% include partials/headerC %>
+<% include ./partials/panier %>
+
+<!-- Contenu-->
+<h2 class='text-center pageTitle'>Historique des factures</h2>
+<div class='titleDecoration'></div>
+
+<section class="container foods">
+    <div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-dark factTable">
+                    <thead>
+                    <tr class='text-center'>
+                        <th scope="col">Date commande</th>
+                        <th scope="col">numero commande</th>
+                        <th scope="col">montant</th>
+                        <th scope="col">Recu</th>
+                        <th scope="col">Paye</th>
+                        <th scope="col">Plus d'infos</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <%factures.forEach(function (facture) {%>
+                        <tr>
+                            <th><%= facture.dateCom %></th>
+                            <td class="text-center"><%= facture.numComm %></td>
+                            <td class="text-right"><%= facture.price%> frs.CFA</td>
+                            <td class="text-center">
+                                <% if (facture.livre === 0) {%>
+                                    <button class="btn btn-success confirm" id="<%= facture.idFact%>">Confirmer reception</button>
+                                <%} else {%>
+                                    Deja degusté
+                                <%}%>
+                            </td>
+                            <td class="text-center">
+                                <% if (facture.status === 0) {%>
+                                    Pas encore réglé
+                                <%} else {%>
+                                        réglé
+                                <%}%>
+                            </td>
+                            <td class="text-center"><a href='/infosFact/<%=facture.idFact%>' class="btn btn-link">Plus d'infos ...</a></td>
+                        </tr>
+                    <%})%>
+
+
+
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</section>
+
+<!--Fin contenu-->
+<% include ./partials/footer %>

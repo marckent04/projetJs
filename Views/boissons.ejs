@@ -9,51 +9,12 @@
 
 <section class="container foods">
         <div class="row">
-            <div class="col-md-4">
-                    <div class="plat">
-                            <div class="imagePlat">
-                                <img src="./public/images/ptiDej/ptiDej2.jpg" alt="" class="img-fluid img-thumbnail">      
-                            </div>
-                            <h4 class="nom text-center text-success">Petit dej</h4>
-                            <p class="description text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Maxime voluptatem explicabo animi dolorem soluta nihil ipsa perferendis modi quam illum.</p>
-                            <div>
-                                <a class="btn btn-block btn-info addCartBtn" href="12345">Ajouter au panier <i class="fas fa-cart-plus"></i></a>
-                                <div class="orangeDivider"></div>
-                                <p class="text-center qte">Quantite restante : <span class="text-danger">20</span></p>
-                                <div class="orangeDivider"></div>
-                            </div>
-                    </div>
-            </div>
-            <div class="col-md-4">
-                    <div class="plat">
-                            <div class="imagePlat">
-                                <img src="./public/images/ptiDej/ptiDej2.jpg" alt="" class="img-fluid img-thumbnail">      
-                            </div>
-                            <h4 class="nom text-center text-success">Petit dej</h4>
-                            <p class="description text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Maxime voluptatem explicabo animi dolorem soluta nihil ipsa perferendis modi quam illum.</p>
-                            <div>
-                                <a class="btn btn-block btn-info addCartBtn" href="12345">Ajouter au panier <i class="fas fa-cart-plus"></i></a>
-                                <p class="text-center qte">Quantite restante : <span class="text-danger">20</span></p>
-                            </div>
-                    </div>
-            </div>
-            <div class="col-md-4">
-                    <div class="plat">
-                            <div class="imagePlat">
-                                <img src="./public/images/ptiDej/ptiDej2.jpg" alt="" class="img-fluid img-thumbnail">      
-                            </div>
-                            <h4 class="nom text-center text-success">Petit dej</h4>
-                            <p class="description text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-                            Maxime voluptatem explicabo animi dolorem soluta nihil ipsa perferendis modi quam illum.</p>
-                            <div>
-                                <a class="btn btn-block btn-info addCartBtn" href="12345">Ajouter au panier <i class="fas fa-cart-plus"></i></a>
-                                <p class="text-center qte">Quantite restante : <span class="text-danger">20</span></p>
-                            </div>
-                            
-                    </div>
-            </div>
+            <% plats.forEach(function (plat) {
+                var path = '../public/images/boissons/' + plat.poster;
+            if (plat.idType === 5) {
+            %>
+                <%- include partials/plat.ejs %>
+            <% }}); %>
         </div>
     </section>
 

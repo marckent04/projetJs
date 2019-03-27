@@ -1,9 +1,14 @@
 <div class="col-md-2" id="facture">
     <h3 class="text-center pageTitle" id="panierTitle">Mes commandes</h3>
     <div class='titleDecoration'></div>
-    <ul class="list-group">
-
+    <ul class="list-group" id="factureContent">
+        <% for(var i=0; i < DynInfos.panier.length; i++ ) { %>
+            <li class="list-group-item" id="<%= DynInfos.panier[i].id %>">
+                <p><%=DynInfos.panier[i].lib%></p>
+                <div class="more"><span><%= DynInfos.panier[i].price %></span><button class="btn btn-danger deleteCart" id="<%= i %>">X</button></div>
+            </li>
+        <% }%>
     </ul>
-    <p class="total">Total : <span id="totalAchats"></span> Frs.CFA</p>
-    <button class="btn btn-block btn-info">Passer a la caisse</button>
+    <p class="total">Total : <span id="totalAchats"><%= DynInfos.prices[0] %></span> Frs.CFA</p>
+    <a class="btn btn-block btn-info" href="/caisse">Passer a la caisse</a>
 </div>

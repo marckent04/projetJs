@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../public/animate.css">
+    <link rel="stylesheet" href="../public/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../public/style.css">
+
+    <title><%pageTitle%></title>
+</head>
+<% include partials/navTopC %>
+<% include partials/headerC %>
+<% include ./partials/panier %>
+
+<h2 class='text-center pageTitle'>Informations de la facture</h2>
+<div class='titleDecoration'></div>
+
+<section class="container food">
+    	<div class="caisse text-center">
+
+        <% lines.forEach(function (line) { %>
+        <div class="more row">
+            <div class="col-8 text-left">
+                <p><%=line.lib%></p>
+            </div>
+            <div class="col-4 text-right">
+                <span><%= line.price %> Frs</span>
+            </div>
+        </div>
+        <% }) %>
+        <hr>
+        <div class="more">
+            <span>Montant total : </span>
+            <span></span>
+        </div>
+    </div>
+</section>
+
+<!--Fin contenu-->
+<footer class="container">
+<div class="row">
+        <div class="col-md-3">
+            <h2>Maman</h2>
+            <p>Heures de service</p>
+            <p>06:00 - 00:00</p>
+            <div class="rs">
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-twitter"></i>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <ul>
+                <li><a href="#">P'Tits Dej</a></li>
+                <li><a href="#">Dej</a></li>
+                <li><a href="#">Gouter</a></li>
+                <li><a href="#">Diner</a></li>
+                <li><a href="#">Boissons</a></li>
+            </ul>
+        </div>
+        <div class="col-md-2 text-right">
+            <h3><a  href="tel:+22541310946">+22541310946</a></h3>
+            <p>Angre Gestoci, non loin du nouveau CHU, Ecole NaN</p>
+        </div>
+        <div class="offset-md-1 col-md-4">
+            <form action="" method="post">
+                <h3>Newsletter</h3>
+                <div class="form-group">
+                  <input type="email" class="form-control" name="mail" placeholder="Votre mail">
+                </div>
+                <button type="submit" class="btn btn-primary">S'inscrire a la Newsletter</button>
+            </form>
+            
+        </div>
+</div>
+</footer>
+<script src="/socket.io/socket.io.js">
+</script>
+<script src="../public/jquery.js"></script>
+<script src="../public/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+<script src="../public/wowjs/dist/wow.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="../public/bootstrap/js/bootstrap.min.js"></script>
+<script src="../public/script.js"></script>
+</body>
+</html>
