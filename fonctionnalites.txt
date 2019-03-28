@@ -1,15 +1,6 @@
-systeme de connexion 
-systeme de deconnexion 
-systeme d'inscription 
+ajout de photo de profil
 
-systeme de notification 
-systeme d'achat
-systeme de confirmation a double facteur 
-crud base de donnees 
+plateforme pour gerer la boutique en ligne 
 
-liste des modules 
-
-session
-sql
-socket.io
+un peu de refonte (CSS)
 

@@ -18,6 +18,7 @@
                         <th scope="col">montant</th>
                         <th scope="col">Recu</th>
                         <th scope="col">Paye</th>
+                        <th scope="col">Apprecier</th>
                         <th scope="col">Plus d'infos</th>
                     </tr>
                     </thead>
@@ -41,7 +42,51 @@
                                         réglé
                                 <%}%>
                             </td>
-                            <td class="text-center"><a href='/infosFact/<%=facture.idFact%>' class="btn btn-link">Plus d'infos ...</a></td>
+                            <td>
+                                <% if ((facture.livre === 1) && (facture.status === 1) && facture.commentaire.length === 0) {%>
+                                    <!-- Button trigger modal -->
+                                    <button type="button" class="btn btn-info btn-block openCommentForm"data-toggle="modal" data-target="#commentC" id="<%=facture.numComm%>">
+                                      Apprecier
+                                    </button>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="commentC" tabindex="-1" role="dialog">
+                                      <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                          <div class="modal-body">
+                                            <form action="/comment" method="post">
+                                                <div class="form-group">
+                                                    <div class="row">
+                                                        <div class="offset-5">
+                                                             <input type="text" readonly class="form-control-plaintext" name="numComm" value="<%= facture.numComm %>" id="numComm">
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                                <div class="form-group text-center">
+                                                    <textarea id='comment' class="form-control" name="comment"></textarea>    
+                                                </div>
+                                                <div class="form-group text-center">
+                                                    <button class="btn btn-info">Envoyer son commentaire</button>    
+                                                </div>
+                                                
+                                            </form>
+                                          </div>
+                                            <div class="modal-footer">
+                                                <marquee class='text-dark' width='100%'>Chez nous, vos commentaires comptent vraiment</marquee>
+                                            </div>
+                                        </div>
+
+                                      </div>
+                                    </div>
+                                <%} else if (facture.commentaire.length > 0){%>
+                                    Merci pour votre commentaire !
+                                <% } else {%>
+                                    Confirmer la reception d'abord
+                                <% } %>
+                            </td>
+                            <td>
+                                <a href="/fact/<%= facture.idFact %>" class="btn btn-block btn-link">Plus...</a>
+                            </td>
                         </tr>
                     <%})%>
 

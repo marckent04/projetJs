@@ -1,6 +1,6 @@
-<% include ./partials/navTopC.ejs %>
-<% include ./partials/head.ejs %>
-<% include ./partials/headerC.ejs %>
+<% include ./partials/navTopC %>
+<% include ./partials/head %>
+<% include ./partials/headerC %>
 <% include ./partials/panier %>
 <!-- Contenu-->
 <h2 class='text-center pageTitle'>Le dejeuner</h2>
@@ -13,7 +13,7 @@
                     var path = '../public/images/dej/' + plat.poster;
                 if (plat.idType === 2) {
                 %>
-                    <%- include partials/plat.ejs %>
+                    <%- include partials/plat %>
                 <% }}); %>
             </div>
         </div>

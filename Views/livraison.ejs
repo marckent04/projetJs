@@ -13,10 +13,11 @@
 			<thead>
 				<tr>
 					<th scope="col">Numero de commande</th>
-					<th scope="col">Prix</th>
+					<th scope="col">Montant total</th>
 					<th scope="col">Date de commande</th>
 					<th scope="col">Confirmation client</th>
 					<th scope="col">Livré</th>
+					<th scope="col">Infos </th>
 				</tr>	
 			</thead>
 			<tbody>
@@ -33,16 +34,19 @@
 						<button class="btn btn-success confirmL" id="<%= facture.idFact%>">Confirmer livraison</button>
 					<% } %>
 				</td>
+				<td>
+					<a href="/factL/<%= facture.idFact %>/<%= facture.price %>/<%=facture.numComm%>" class="btn btn-block btn-link">Plus...</a>
+				</td>
 				<tr>
 			<% }); %>
 			</tbody>
 		</table>
 	</div>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>s
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script src="../public/script.js"></script>
-<script src="/socket.io/socket.io.js"></script>
+<script src="public/script.js"></script>
 </body>
 </html>

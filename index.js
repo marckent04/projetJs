@@ -8,10 +8,11 @@ const morgan = require('morgan')
 const mysql = require('mysql')
 const http = require('http').createServer(app)
 const io = require('socket.io')(http)
-const Promise = require('bluebird')
 const verify = require('./verify')
 const crypto = require('crypto')
 const generator = require('./generator')
+const multer = require('multer')
+const path = require('path')
 
 const port = 8090
 let session = null
@@ -43,8 +44,28 @@ const db = mysql.createConnection({
                     console.log(error)
         });
 
+            //upload
+    const storage = multer.diskStorage({
+          destination: './public/pp/',
+          filename: function(req, file, cb){
+            // notre fonction  callback permet de formater le nom de notre fichier enregistrer
+            // de cette faxon leNomduChamp13315431.jpg par exemple
+            cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+          }
+    })
 
+    const upload = multer({
+      storage : storage,
+      // storage Via multer je veus stocker mes info 
+      storalimits:{fileSize: 5000000},
+      //  la taille maximal du fichier
+      fileFilter: function(req, file, cb){
+        VerifycheckFileType(file, cb);
+        // VerifycheckFileType permet de verifier si tout va bien si l'extension est un /jpeg|jpg|png|gif/ sinon on affiche l'erreur 
+      } 
+    }).single('myImage')
 
+//fin upload
             //Debut routes
 
             app.set('views', './Views').set('view engine', 'ejs')
@@ -55,15 +76,25 @@ const db = mysql.createConnection({
                 .use(bodyParser.json())
                 .use(bodyParser.urlencoded({ extended : false }));
 
-                app.get('/', (req, res) => {
-                    db.query('SELECT * FROM foods', function (error, results) {
+                db.query('SELECT * FROM foods', function (error, results) {
                         if (!error)
                             plats = results
                         else
                             console.log(error)
-                    })
+                })
+                app.get('/', (req, res) => {
+                    
                         if (session) {
-                            res.render('indexC', {session, pageTitle: 'Maman', DynInfos, plats})
+                            let requete = 'SELECT * FROM foods INNER JOIN commandes ON foods.id = commandes.idFood AND client = ? ORDER BY commandes.num DESC LIMIT 10'
+                            db.query(requete, [session.id], (err, result) => {
+                                if (!err) {
+                                    let history = result
+                                    res.render('indexC', {session, pageTitle: 'Maman', DynInfos, history})
+                                }
+                                else
+                                    console.log(err.message)
+
+                            })
                         } else
                             res.render('index', {pageTitle: 'Maman', DynInfos, plats})
 
@@ -137,7 +168,7 @@ const db = mysql.createConnection({
                     })
                     .get('/connexion', (req, res) => {
                         if (session) {
-                            res.redirect('/home')
+                            res.redirect('/')
                         }
                         else {
                             res.redirect('/')
@@ -148,55 +179,55 @@ const db = mysql.createConnection({
                         let sql = `SELECT ${donnees}  FROM facture INNER JOIN users ON facture.idCli = users.id AND facture.status = 0 ORDER BY facture.dateCom DESC`
                         db.query(sql, (err, results) => {
                           if (!err) {
-                            console.log(results)
                             let factures = results
                             if (factures.length > 0)
                                 res.render('livraison', {factures})
-                    
+                            else {
+                                res.end('Il n\' y a aucune commande pour le moment !')
+                            }
                           }
                           else
                             res.end(err.message)  
                         })
                     })
-                    .get('/infosFact/:id', (req, res) => {
-                        if (session) {
-                            console.log(req.params.id)
+                    .get('/fact/:id', (req, res) => {
+                        if(session) {
                             let id = req.params.id
-                            
-                            let recup = new Promise((resolve, reject) => {
-                                db.query('SELECT idFood FROM commandes WHERE idFact = ? AND client = ?', [id, session.id], (err, results) => {
-                                if(!err) {
-                                    let lines = results 
-                                    console.log(lines)
-                                    resolve(lines)
-                                      //res.render('fact', {pageTitle: 'Informations facture' ,lines, DynInfos, session})
+                            db.query('SELECT * FROM commandes INNER JOIN foods WHERE commandes.idFood = foods.id AND idFact = ?', [id], (err, results) => {
+                                if (!err) {
+                                    let lines = results
+                                    res.render('fact', {pageTitle: 'Infos commande' ,lines, session, DynInfos})           
                                 }
-                                else {
-                                    console.log(err.message)
-                                    res.redirect('/fact')
-                                }
-                            })    
-                            }).then((lines) => {
-                                console.log(lines)
-                                let newLines = []
-                                lines.forEach((line) => {
-                                    db.query('SELECT lib, price FROM foods WHERE id = ?',[line.idFood], (err, res) => {
-                                        if (!err) {
-                                            console.log('resultat')
-                                            console.log(res)
-                                            newLines.push(res)
-                                        }
-                                    })
-                                    
-                                })
-                                console.log('tableau')
-                                    console.log(newLines)
-                            }).then((newLines) => {
-                                
-                                res.end('ok')
                             })
-                            
                         }
+                    })
+                    .get('/factL/:id/:mtn/:num', (req, res) => {
+                        let id = req.params.id
+                        let montant = req.params.mtn
+                        let num = req.params.num
+                            db.query('SELECT * FROM commandes INNER JOIN foods WHERE commandes.idFood = foods.id AND idFact = ?', [id], (err, results) => {
+                                if (!err) {
+                                    let lines = results
+                                    res.render('factL', {pageTitle: 'Infos commande' ,lines, session, DynInfos, montant, num})           
+                                }
+                            })
+                    })
+                    .post('/comment', (req, res) => {
+                        if (req.body.comment.length > 0) {
+                            let comment = req.body.comment
+                            let num = req.body.numComm
+                            db.query('UPDATE facture SET commentaire = ? WHERE numComm = ?', [comment, num], (err, result) => {
+                                if(!err) 
+                                    res.redirect('/fact')
+                                else
+                                    console.log(err.message)
+                            })
+                        }
+
+                    })
+                    
+                    .get('/validateBuy', (req, res) => {
+                        res.render('validate',  {session, pageTitle: 'Commande recu', DynInfos})
                     })
 
 
@@ -244,7 +275,6 @@ const db = mysql.createConnection({
                         let resp = {panier: panier, prices: prices}
                         resolve(resp)
                     }).then((resp) => {
-                        console.log(resp)
                         socket.emit('newPanier', resp)
                     })
                 })
@@ -335,7 +365,6 @@ const db = mysql.createConnection({
                         DynInfos = { panier, prices}
                         resolve(prices)
                     }).then((data) => {
-                       console.log(data)
                         socket.emit('confirmDeconnexion')
                     })
 
@@ -353,8 +382,6 @@ const db = mysql.createConnection({
                 };
                 //systeme d'inscription
                 socket.on('inscriptionData', (data) => {
-                    //console.log(data);
-
                     //verification champs vides
                     results.fname = (verify.required(data[0].value)) ? 1 : 0;
                     results.name = (verify.required(data[1].value)) ? 1 : 0;
@@ -366,11 +393,9 @@ const db = mysql.createConnection({
                     if (results.tel === 1) results.tel = (!isNaN(data[5].value)) ? 1 : 3;
                     if (results.tel === 1) results.tel = (data[5].value.length === 8) ? 1 : 4;
 
-                    console.log(`1ere valeur ${results.mail}`)
 
                     if (results.mail === 1) results.mail = (verify.mail(data[2].value)) ? 1 : 3
 
-                    console.log(`2eme valeur ${results.mail}`)
 
                     if (results.mdp === 1) results.mdp = (data[3].value.length >= 8) ? 1 : 3
                     if (results.mdp === 1) results.mdp = (data[3].value === data[4].value) ? 1 : 4
@@ -399,9 +424,7 @@ const db = mysql.createConnection({
                                         [data[1].value, data[0].value, data[2].value,cryptMdp, data[4].value],
                                         function (error, result) {
                                             if (err) console.log(error)
-                                            else{
-                                                console.log(results)
-                                            }
+                                            
                                         })
                                 })
                                  socket.emit('resInscription', results)
@@ -429,7 +452,6 @@ const db = mysql.createConnection({
                                  resolve(results.insertId)
                             }
                         })}).then((id) => {
-                            console.log(id)
                             panier.forEach((food) => {
                                 let values = [session.id, id, food.id]
                                 db.query('INSERT INTO commandes (client, idFact, idFood) VALUES (?, ?, ?)', values,function (error, results) {

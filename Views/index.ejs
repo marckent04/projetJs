@@ -3,13 +3,13 @@
 <% include ./partials/header %>
 <% include ./partials/panier %>
 <section>
-    <div id="publicites" class="carousel slide carousel-slide" data-ride="carousel">
+    <div id="publicites" class="carousel slide carousel-fade" data-ride="carousel">
         <div class="actionBox">
             <h3 class="title">Petit Dejeuner</h3>
             <div class="box-divider"></div>
             <p class="comment">Petit commentaire</p>
             <p>Pour une journee pleine d'energie</p>
-            <a class="btn btn-light lien" href="">Voir plus ...</a>
+            <a class="btn btn-dark lien" href="">Voir plus ...</a>
             <ol class="carousel-indicators">
                 <li data-target="#publicites" data-slide-to="0" class="active"></li>
                 <li data-target="#publicites" data-slide-to="1"></li>
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="text-right">
-            <button class="btn btn-primary">Je prends</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#connexionModal">Je veux encore plus ...</button>
         </div>
     </div>
 
@@ -130,7 +130,7 @@
             </div>
         </div>
         <div class="text-right">
-            <button class="btn btn-primary">Je prends</button>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#connexionModal">Je veux encore plus ...</button>
         </div>
     </div>
 </section>
