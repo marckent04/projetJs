@@ -1,0 +1,13 @@
+<% include ./partials/navTopC %>
+<% include ./partials/head %>
+<% include ./partials/headerC %>
+<% include ./partials/panier %>
+
+<section class="container">
+	<div class="alert alert-success" role="alert" style="margin-top: 10%;">
+	  <h4 class="alert-heading text-center">Commande recue !</h4>
+	  <p>Merci, pour votre confiance Mr. <%= session.firstname %> <%= session.name%>. Le service de livraison va vous appeller dans tout au plus 10min pour la confirmation de votre commande !</p>
+	</div>
+</section>
+
+<% include ./partials/footer %>

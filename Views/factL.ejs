@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang='fr'>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <title>Service Livraison - infos Facture</title>
+</head>
+<body>
+    <section class="container food">
+        <div class="row">
+
+            <div class="caisse text-center offset-md-4 col-md-4">
+            <h2>Facture n° <%= num %></h2>
+            <% lines.forEach(function (line) { %>
+            <div class="more row">
+                <div class="col-8 text-left">
+                    <p><%=line.lib%></p>
+                </div>
+                <div class="col-4 text-right">
+                    <span><%= line.price %> Frs</span>
+                </div>
+            </div>
+            <% }) %>
+            <div class="more row">
+                <div class="col-8 text-left">
+                    <p>Livraison </p>
+                </div>
+                <div class="col-4 text-right">
+                    <span>1000 Frs</span>
+                </div>
+            </div>
+            <hr>
+            <div class="more row">
+                <div class="col-8 text-left">
+                    <p>Montant total : </p>
+                </div>
+                <div class="col-4 text-right">
+                    <span><%= montant %> Frs</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
